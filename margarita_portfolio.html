@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Margarita Chuguevskaya — UX Researcher & Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --cream: #f5f0e8;
+    --warm-white: #fdfaf5;
+    --sage: #4a7c59;
+    --sage-light: #a8c5b0;
+    --sage-pale: #e8f0ea;
+    --amber: #c4832a;
+    --amber-light: #f0d5a8;
+    --muted: #6b6560;
+    --border: #ddd8ce;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(253,250,245,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sage); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 110px 60px 90px;
+    position: relative;
+    overflow: hidden;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .hero-bg-circle.c1 { width: 500px; height: 500px; top: -150px; right: -100px; }
+  .hero-bg-circle.c2 { width: 300px; height: 300px; bottom: -100px; left: 60px; }
+  .hero-bg-circle.c3 { width: 200px; height: 200px; top: 50%; right: 200px; }
+
+  .hero-inner {
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--sage-light);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 90px);
+    font-weight: 900;
+    line-height: 1.0;
+    margin-bottom: 16px;
+  }
+  .hero h1 .name-line {
+    display: block;
+    color: var(--cream);
+  }
+  .hero h1 .title-line {
+    display: block;
+    color: var(--sage-light);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(28px, 4vw, 52px);
+    margin-top: 8px;
+  }
+
+  .hero-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(245,240,232,0.65);
+    max-width: 560px;
+    margin: 36px 0 52px;
+    line-height: 1.85;
+  }
+
+  .hero-tagline strong {
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 72px;
+  }
+
+  .btn-primary {
+    background: var(--sage);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: #3d6b4a; transform: translateY(-2px); }
+
+  .btn-ghost {
+    color: rgba(245,240,232,0.7);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--cream); }
+
+  .hero-stats {
+    display: flex;
+    gap: 52px;
+    flex-wrap: wrap;
+    padding-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .hero-stat .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat .stat-desc {
+    font-size: 12px;
+    color: rgba(245,240,232,0.45);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTIONS ── */
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  section { padding: 88px 0; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--sage-pale);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 18px;
+  }
+
+  p {
+    color: #2e2b27;
+    line-height: 1.85;
+    margin-bottom: 18px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── OPENING STORY STRIP ── */
+  .story-strip {
+    background: var(--sage);
+    color: var(--cream);
+    padding: 64px 60px;
+  }
+
+  .story-strip blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.8vw, 30px);
+    font-style: italic;
+    line-height: 1.55;
+    max-width: 740px;
+    padding-left: 32px;
+    border-left: 3px solid var(--sage-light);
+    margin-bottom: 20px;
+  }
+  .story-strip .attr {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--sage-light);
+    padding-left: 32px;
+  }
+
+  /* ── ABOUT SECTION ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+    margin-top: 40px;
+  }
+
+  .about-left p { font-size: 16px; }
+
+  .skills-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .skills-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: #2e2b27;
+    line-height: 1.5;
+  }
+  .skills-list li::before {
+    content: '→';
+    color: var(--sage);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .about-callout {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 16px;
+    padding: 36px;
+    margin-top: 32px;
+  }
+  .about-callout p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: rgba(245,240,232,0.85);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .about-callout .callout-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--sage-light);
+    margin-top: 16px;
+    display: block;
+    font-style: normal;
+  }
+
+  /* ── CASE STUDIES ── */
+  .cases-intro {
+    max-width: 600px;
+    margin-bottom: 52px;
+  }
+
+  .case-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    transition: box-shadow 0.25s, transform 0.25s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .case-card:hover {
+    box-shadow: 0 16px 60px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+  }
+
+  .case-card.featured {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    border-color: var(--sage);
+    border-width: 2px;
+  }
+
+  .case-image {
+    background: var(--sage-pale);
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .case-image.dark { background: var(--ink); }
+  .case-image.amber { background: var(--amber-light); }
+  .case-image.blue { background: #e5edf5; }
+
+  .case-image .project-visual {
+    font-family: 'Playfair Display', serif;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.15;
+    position: absolute;
+    bottom: -10px;
+    right: 16px;
+    color: var(--ink);
+  }
+  .case-image.dark .project-visual { color: white; opacity: 0.08; }
+
+  .case-tag {
+    display: inline-flex;
+    align-items: center;
+    background: var(--sage);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    position: relative;
+    z-index: 1;
+  }
+  .case-tag.amber-tag { background: var(--amber); }
+  .case-tag.dark-tag { background: var(--ink); }
+
+  .case-body {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .case-body .case-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .case-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+
+  .case-body p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .case-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .pill {
+    background: var(--sage-pale);
+    color: var(--sage);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .case-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sage);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+  .case-link:hover { text-decoration: underline; }
+
+  .case-result {
+    display: flex;
+    gap: 32px;
+    margin-top: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .case-result .result-stat .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--sage);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .case-result .result-stat .label {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* Featured card override */
+  .case-card.featured .case-image {
+    min-height: 220px;
+  }
+  .case-card.featured .case-body {
+    border-top: 2px solid var(--sage-pale);
+  }
+
+  /* ── FEATURED BADGE ── */
+  .featured-badge {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: var(--sage);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    z-index: 2;
+  }
+
+  /* ── PROCESS / THINKING ── */
+  .thinking-section {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .thinking-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 48px;
+  }
+
+  .thinking-card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+  }
+
+  .thinking-card .t-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .thinking-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .thinking-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* ── IMPACT STRIP ── */
+  .impact-strip {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 80px 60px;
+  }
+
+  .impact-strip h2 {
+    color: var(--cream);
+    max-width: 560px;
+    margin-bottom: 48px;
+  }
+  .impact-strip h2 em {
+    font-style: italic;
+    color: var(--sage-light);
+  }
+
+  .impact-numbers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+
+  .impact-num .number {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .impact-num .impact-label {
+    font-size: 13px;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.5;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    text-align: center;
+    padding: 100px 40px;
+  }
+
+  .contact-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 58px);
+    font-style: italic;
+    font-weight: 400;
+    max-width: 640px;
+    margin: 0 auto 20px;
+    line-height: 1.2;
+  }
+
+  .contact-section p {
+    max-width: 440px;
+    margin: 0 auto 40px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .contact-pill.primary {
+    background: var(--ink);
+    color: white;
+  }
+  .contact-pill.primary:hover { background: var(--sage); transform: translateY(-2px); }
+  .contact-pill.secondary {
+    border: 1.5px solid var(--border);
+    color: var(--ink);
+  }
+  .contact-pill.secondary:hover { border-color: var(--sage); color: var(--sage); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.7s ease both 0.1s; }
+  .hero h1      { animation: fadeUp 0.7s ease both 0.25s; }
+  .hero-tagline { animation: fadeUp 0.7s ease both 0.4s; }
+  .hero-cta-row { animation: fadeUp 0.7s ease both 0.5s; }
+  .hero-stats   { animation: fadeUp 0.7s ease both 0.65s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 80px 24px 64px; min-height: auto; }
+    .story-strip { padding: 48px 24px; }
+    .container { padding: 0 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .case-card { grid-template-columns: 1fr; }
+    .case-card.featured { grid-template-columns: 1fr; }
+    .thinking-grid { grid-template-columns: 1fr; }
+    .impact-strip { padding: 64px 24px; }
+    .impact-numbers { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .hero-stats { gap: 32px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-name">Margarita Chuguevskaya</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-bg-circle c3"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">UX Researcher & Designer — New York</p>
+    <h1>
+      <span class="name-line">Margarita</span>
+      <span class="name-line">Chuguevskaya</span>
+      <span class="title-line">turns user behavior into product clarity.</span>
+    </h1>
+    <p class="hero-tagline">
+      <strong>10+ years</strong> of translating what users actually do — not just what they say — into decisions that move metrics, ship better products, and build lasting trust.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#work" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-ghost">Get in touch →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="number">10+</div>
+        <div class="stat-desc">Years in UX Research</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">5</div>
+        <div class="stat-desc">Years at FanDuel</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">100+</div>
+        <div class="stat-desc">Research Sessions Led</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">↑</div>
+        <div class="stat-desc">Registrations & Retention</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── STORY STRIP ── -->
+<div class="story-strip">
+  <div class="container">
+    <blockquote>
+      "I don't just study users — I help teams act on what they find. Great research doesn't live in a deck. It moves a product forward."
+    </blockquote>
+    <p class="attr">— Margarita Chuguevskaya, UX Researcher & Designer</p>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">Who I Am</p>
+    <h2>Research that sits at the intersection of users, product, and business.</h2>
+
+    <div class="about-grid">
+      <div class="about-left">
+        <p>I'm a UX Researcher and Designer with 10+ years of experience turning complex user behavior into clear product strategy. For five years I led research at FanDuel — one of the world's largest sports betting platforms — partnering directly with product, design, and executive teams on decisions that affected millions of users.</p>
+        <p>My work spans industries: e-commerce, healthcare, entertainment, fitness, fintech. What stays constant is my approach — grounding every recommendation in observable behavior, and making sure every insight is impossible to ignore.</p>
+        <div class="about-callout">
+          <p>"What I love about UX is the freedom to create powerful, engaging solutions — and knowing that real people are using them every day."</p>
+          <span class="callout-name">— Margarita</span>
+        </div>
+      </div>
+      <div class="about-right">
+        <ul class="skills-list">
+          <li>Represent the true voice of the customer by deeply understanding motivations, behaviors, and decision-making patterns</li>
+          <li>Design and execute end-to-end research programs that identify pain points and drive measurable KPI improvements</li>
+          <li>Lead moderated interviews, usability tests, workshops, and field studies across diverse user segments</li>
+          <li>Translate complex behavioral insights into compelling narratives that influence product direction at every level</li>
+          <li>Bridge user needs with business strategy — building products people love that also succeed commercially</li>
+          <li>Mentor junior researchers and help organizations build scalable, sustainable research practices</li>
+          <li>Collaborate cross-functionally with product, design, engineering, and marketing stakeholders</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THINKING SECTION ── -->
+<section class="thinking-section">
+  <div class="container">
+    <p class="section-label">How I Think</p>
+    <h2>Beyond the screen. Beyond the session.</h2>
+    <div class="thinking-grid">
+      <div class="thinking-card">
+        <span class="t-icon">🔍</span>
+        <h4>Observation over Opinion</h4>
+        <p>I design sessions that surface behavior, not just feedback. What users do tells a different story than what they say — I capture both and know which one to trust.</p>
+      </div>
+      <div class="thinking-card">
+        <span class="t-icon">🧩</span>
+        <h4>Insight, Not Just Findings</h4>
+        <p>A finding is "users struggled with step 3." An insight is why — and what that means for the business. I never hand a team a list of problems without a frame for solving them.</p>
+      </div>
+      <div class="thinking-card">
+        <span class="t-icon">📣</span>
+        <h4>Research That Moves Teams</h4>
+        <p>Every deliverable I produce is designed to drive a decision — not sit in a folder. I match recommendations to the right stakeholder so accountability is built in from the start.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASE STUDIES ── -->
+<section id="work">
+  <div class="container">
+    <p class="section-label">Selected Work</p>
+    <div class="cases-intro">
+      <h2>Case studies that show the full picture — problem, process, and proof.</h2>
+      <p>Each project below follows the complete research arc: the problem that needed solving, how I approached it, what I found, and what changed as a result.</p>
+    </div>
+
+    <!-- CASE 1: STABLE — FEATURED -->
+    <a href="https://mc-ux.com/fanduel-racing-stable-feature/" target="_blank" class="case-card featured" style="text-decoration:none; display:block; border-radius:16px; overflow:hidden; border: 2px solid var(--sage); background:white; margin-bottom:32px; transition: box-shadow 0.25s, transform 0.25s;">
+      <div class="case-image" style="min-height:200px; background:var(--sage-pale); padding:40px; position:relative; display:flex; align-items:center; justify-content:center;">
+        <span class="featured-badge">★ Latest Study</span>
+        <span style="font-family:'Playfair Display',serif; font-size:80px; font-weight:900; opacity:0.12; color:var(--ink);">Stable</span>
+      </div>
+      <div class="case-body" style="padding:40px; border-top: 2px solid var(--sage-pale);">
+        <p class="case-meta">FanDuel Racing · Prototype Testing · 2025</p>
+        <h3>When Users Accidentally Discover a Feature — and Then Can't Live Without It</h3>
+        <p>A 6-participant prototype study of the Stable 2.0 redesign uncovered a critical discoverability gap, validated the core UX, and produced a stakeholder-mapped roadmap that reshaped how the team thought about onboarding, alerts, and data depth.</p>
+        <div class="case-pills">
+          <span class="pill">Moderated Testing</span>
+          <span class="pill">Prototype Validation</span>
+          <span class="pill">Insight Synthesis</span>
+          <span class="pill">Video Evidence</span>
+        </div>
+        <div class="case-result">
+          <div class="result-stat">
+            <div class="number">5</div>
+            <div class="label">Key insights</div>
+          </div>
+          <div class="result-stat">
+            <div class="number">12+</div>
+            <div class="label">Stakeholder recs</div>
+          </div>
+          <div class="result-stat">
+            <div class="number">6</div>
+            <div class="label">Participants</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- CASE 2: REGISTRATION -->
+    <a href="https://mc-ux.com/tvg-fanduel-registration-flow/" target="_blank" class="case-card" style="text-decoration:none; display:grid; grid-template-columns:1fr 1.4fr; border-radius:16px; overflow:hidden; border:1px solid var(--border); background:white; margin-bottom:32px; transition: box-shadow 0.25s, transform 0.25s;">
+      <div class="case-image dark" style="background:var(--ink); min-height:240px; padding:40px; display:flex; flex-direction:column; justify-content:flex-end; position:relative;">
+        <span class="case-tag">Problem-Solver</span>
+        <span class="project-visual" style="font-family:'Playfair Display',serif; font-size:64px; font-weight:900; opacity:0.08; color:white; position:absolute; bottom:-10px; right:16px;">Reg</span>
+      </div>
+      <div class="case-body">
+        <p class="case-meta">TVG · FanDuel · 2-Round User Testing · 2021</p>
+        <h3>How Two Rounds of Testing Fixed a Broken Registration — and Uncovered a Hidden Bug</h3>
+        <p>27 participants across desktop and mobile revealed that the multi-step form hypothesis was wrong for desktop, that SSN friction was fixable with one sentence of copy, and that a backend bug was masking the true user experience.</p>
+        <div class="case-pills">
+          <span class="pill">Multi-Round Testing</span>
+          <span class="pill">Hypothesis Validation</span>
+          <span class="pill">Conversion Research</span>
+        </div>
+        <div class="case-result">
+          <div class="result-stat">
+            <div class="number">27</div>
+            <div class="label">Participants</div>
+          </div>
+          <div class="result-stat">
+            <div class="number">↑</div>
+            <div class="label">Successful registrations</div>
+          </div>
+          <div class="result-stat">
+            <div class="number">↓</div>
+            <div class="label">CS tickets</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- CASE 3: CS TICKETS -->
+    <a href="https://mc-ux.com/tvg-fanduel-user-research/" target="_blank" class="case-card" style="text-decoration:none; display:grid; grid-template-columns:1fr 1.4fr; border-radius:16px; overflow:hidden; border:1px solid var(--border); background:white; margin-bottom:32px; transition: box-shadow 0.25s, transform 0.25s;">
+      <div class="case-image amber" style="background:var(--amber-light); min-height:240px; padding:40px; display:flex; flex-direction:column; justify-content:flex-end; position:relative;">
+        <span class="case-tag amber-tag">Results Project</span>
+        <span style="font-family:'Playfair Display',serif; font-size:64px; font-weight:900; opacity:0.12; color:var(--ink); position:absolute; bottom:-10px; right:16px;">CS</span>
+      </div>
+      <div class="case-body">
+        <p class="case-meta">TVG · FanDuel · CS Audit · 2021</p>
+        <h3>Turning CS Ticket Data into a UX Research Goldmine</h3>
+        <p>A systematic audit of customer service tickets revealed recurring pain point patterns that live user testing alone would have taken months to surface — directly informing product priority decisions.</p>
+        <div class="case-pills">
+          <span class="pill">Data Analysis</span>
+          <span class="pill">Mixed Methods</span>
+          <span class="pill">Strategic Insight</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- MORE WORK ROW -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:8px;">
+      <a href="https://mc-ux.com/pacecar/" target="_blank" style="text-decoration:none; border:1px solid var(--border); border-radius:12px; padding:28px; background:white; transition:box-shadow 0.2s; display:block;">
+        <p style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;">PaceCar · 2020</p>
+        <h4 style="font-family:'Playfair Display',serif; font-size:18px; font-weight:700; margin-bottom:8px; color:var(--ink);">Insurance Lenders Site Redesign</h4>
+        <p style="font-size:13px; color:var(--muted); margin:0; line-height:1.6;">UX research and design for a financial services platform — balancing compliance constraints with user clarity.</p>
+      </a>
+      <a href="https://mc-ux.com/airbus-mobile-app-android/" target="_blank" style="text-decoration:none; border:1px solid var(--border); border-radius:12px; padding:28px; background:white; transition:box-shadow 0.2s; display:block;">
+        <p style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;">Airbus · 2020</p>
+        <h4 style="font-family:'Playfair Display',serif; font-size:18px; font-weight:700; margin-bottom:8px; color:var(--ink);">Airbus Mobile App (Android)</h4>
+        <p style="font-size:13px; color:var(--muted); margin:0; line-height:1.6;">Enterprise mobile UX research for one of the world's leading aerospace companies.</p>
+      </a>
+    </div>
+
+    <div style="text-align:center; margin-top:44px;">
+      <a href="https://mc-ux.com/" target="_blank" style="display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--sage); text-decoration:none; border:1.5px solid var(--sage); padding:12px 28px; border-radius:100px; transition:all 0.2s;">
+        View all projects on mc-ux.com →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMPACT STRIP ── -->
+<div class="impact-strip">
+  <div class="container">
+    <h2>Research that created <em>measurable</em> outcomes — not just recommendations.</h2>
+    <div class="impact-numbers">
+      <div class="impact-num">
+        <div class="number">↑</div>
+        <div class="impact-label">Successful registrations post-TVG redesign</div>
+      </div>
+      <div class="impact-num">
+        <div class="number">↓</div>
+        <div class="impact-label">CS tickets related to registration & verification</div>
+      </div>
+      <div class="impact-num">
+        <div class="number">↓</div>
+        <div class="impact-label">Time spent on registration after changes</div>
+      </div>
+      <div class="impact-num">
+        <div class="number">5yr</div>
+        <div class="impact-label">Leading research at a global sports-betting platform</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="contact-section">
+  <h2>Let's build something people actually love using.</h2>
+  <p>I'm currently open to new opportunities. If you want research that drives real product decisions — let's talk.</p>
+  <div class="contact-links">
+    <a href="mailto:hello@mc-ux.com" class="contact-pill primary">✉ Email Me</a>
+    <a href="https://mc-ux.com/" target="_blank" class="contact-pill secondary">View Full Portfolio</a>
+    <a href="https://www.linkedin.com/in/margaritachuguevskaya" target="_blank" class="contact-pill secondary">LinkedIn</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2025 Margarita Chuguevskaya</p>
+  <p>UX Researcher & Designer · New York</p>
+</footer>
+
+<style>
+  .case-card:hover { box-shadow: 0 16px 60px rgba(0,0,0,0.1); transform: translateY(-4px); }
+</style>
+
+</body>
+</html>
